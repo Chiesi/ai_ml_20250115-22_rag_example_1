@@ -6,9 +6,10 @@ import textwrap
 
 # Instance the client with the OpenAPI key
 f = open("openai.key", "r")
-os.environ['OPENAI_API_KEY']=f.readline().strip()
+client = OpenAI(
+    api_key=f.readline().strip()
+)
 f.close()
-client = OpenAI()
 
 # Setup our knowledge storage
 db_records = [
@@ -33,7 +34,7 @@ def call_llm_with_full_text(itext):
                 {"role": "assistant", "content": "1.You can explain read the input and answer in detail"},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.1  # Add the temperature parameter here and other parameters you need
+            temperature=0.1  # Let's discuss what temperature does!
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
