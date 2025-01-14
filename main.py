@@ -1,3 +1,4 @@
+import os
 import openai
 from openai import OpenAI
 import time
@@ -5,9 +6,9 @@ import textwrap
 
 # Instance the client with the OpenAPI key
 f = open("openai.key", "r")
-client = OpenAI()
-client.api_key=f.readline().strip()
+os.environ['OPENAI_API_KEY']=f.readline().strip()
 f.close()
+client = OpenAI()
 
 # Setup our knowledge storage
 db_records = [
