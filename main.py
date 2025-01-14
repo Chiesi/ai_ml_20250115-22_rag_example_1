@@ -3,9 +3,10 @@ from openai import OpenAI
 import time
 import textwrap
 
-# Setup the OpenAI access key
+# Instance the client with the OpenAPI key
 f = open("openai.key", "r")
-openai.api_key=f.readline().strip()
+client = OpenAI()
+client.api_key=f.readline().strip()
 f.close()
 
 # Setup our knowledge storage
@@ -15,8 +16,6 @@ db_records = [
     of natural language processing (NLP).",
 ]
 
-# Instance the client
-client = OpenAI()
 gptmodel="gpt-4o"
 start_time = time.time()
 
