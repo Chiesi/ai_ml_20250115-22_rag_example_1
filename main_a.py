@@ -11,13 +11,7 @@ client = OpenAI(
 )
 f.close()
 
-# Setup our knowledge storage
-db_records = [
-    "Retrieval Augmented Generation (RAG) represents a sophisticated hybrid \
-    approach in the field of artificial intelligence, particularly within the realm \
-    of natural language processing (NLP).",
-]
-
+# Set up basic configurations and timing references
 gptmodel="gpt-4o"
 start_time = time.time()
 
@@ -51,7 +45,6 @@ def print_formatted_response(response):
     print(wrapped_text)
     print("---------------\n")
 
-#TODO: Read from user input
 query = "define a rag store"
 
 # And here the magic happens!
