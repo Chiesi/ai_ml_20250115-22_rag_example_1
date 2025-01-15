@@ -7,10 +7,10 @@ import textwrap
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 # Needed to calculate enhanced distance - pip install spacy nltk numpy && python -m spacy download en_core_web_sm
-import spacy
-import nltk
-nltk.download('wordnet')
-from nltk.corpus import wordnet
+# import spacy
+# import nltk
+# nltk.download('wordnet')
+# from nltk.corpus import wordnet
 from collections import Counter
 import numpy as np
 
@@ -26,7 +26,7 @@ gptmodel="gpt-4o"
 start_time = time.time()
 
 # Load spaCy with en_core_web_sm tokenizer and suite
-nlp = spacy.load("en_core_web_sm")
+# nlp = spacy.load("en_core_web_sm")
 
 # Invoke the LLM with the user prompt
 def call_llm_with_full_text(itext):

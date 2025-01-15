@@ -22,7 +22,8 @@ client = OpenAI(
 f.close()
 
 # Set up basic configurations and timing references
-gptmodel="gpt-4o"
+# gptmodel="gpt-4o"
+gptmodel = "gpt-3.5-turbo"
 start_time = time.time()
 
 # Load spaCy with en_core_web_sm tokenizer and suite
@@ -79,9 +80,14 @@ def calculate_cosine_similarity(text1, text2):
 
 # Set up our knowledge storage
 db_records = [
-    "Retrieval Augmented Generation (RAG) represents a sophisticated hybrid \
-    approach in the field of artificial intelligence, particularly within the realm \
-    of natural language processing (NLP).",
+    "Product A, 2, 10",
+    "Product B, 3, 15",
+    "Product C, 4, 40",
+    "Product D, 5, 25",
+    "Product E, 6, 30", 
+    "Product F, 7, 35", 
+    "Product G, 8, 40", 
+    "Product H, 9, 45", 
 ]
 
 # Tries to find the best match against a database of knowledge
@@ -103,13 +109,21 @@ def find_best_match_keyword_search(query, db_records):
             best_record = record
     return best_score, best_record
 
-query = "define a rag store"
-
-# And here the magic happens!
-# llm_response = call_llm_with_full_text(query)
-# print_formatted_response(llm_response)
+query = "Find the most valuable product from the sales count and sales revenue in this data." \
+    + "The data is a list of CSV rows, with the first column bearing the product name, " \
+    + "the second column bearing the number of sold units, and the third column " \
+    + "bearing the total revenue from all sold units"
+# query = "Find the most valuable product from the data"
 
 # What if we don't invoke the LLM at all?
-best_keyword_score, best_matching_record = find_best_match_keyword_search(query, db_records)
-print(f"Best Keyword Score: {best_keyword_score}")
-print_formatted_response(best_matching_record)
+# best_keyword_score, best_matching_record = find_best_match_keyword_search(query, db_records)
+# print(f"Best Keyword Score: {best_keyword_score}")
+
+# Let's augment the input with the best matching k
+augmented_input=query+ ": "+ " \n".join(db_records)
+#augmented_input=query
+print_formatted_response(augmented_input)
+
+# And here the magic happens!
+llm_response = call_llm_with_full_text(augmented_input)
+print_formatted_response(llm_response)
